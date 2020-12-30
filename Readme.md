@@ -185,10 +185,10 @@ training(input_dic)
 (일부 폴더 구성이 다른 경우가 있을 수 있음.)
 ```bash
 Results
-  ├──nextframe_fi50_Humaneva
-    ├──Static_Conv_multi_sep1by1_m10_e128_hop1
-      ├──unet_conv[3,32,64,128][True, True, True]
-        ├──L1Loss_e1e-03_d1e-03_W64H64
+  ├──nextframe_fi50_Humaneva # 테스트이름_프레임간격_데이터세트 종류
+    ├──Static_Conv_multi_sep1by1_m10_e128_hop1 # 사용한 메모리 네트워크 이름
+      ├──unet_conv[3,32,64,128][True, True, True] # 인코더 디코더 네트워크 이름
+        ├──L1Loss_e1e-03_d1e-03_W64H64 # 손실함수_러닝레이트_이미지 
           ├──best_loss
             ├──out_image
               ├──0
