@@ -74,11 +74,9 @@ training
     ├──Spatial_weight
     ├──Flat
 ```
-```unet``` 폴더 내부는 skip connection 연결에 따른 실험 ```Skip Connection```, FC/Conv 임베딩 구조 개선 실험 ```Embedding```, 유사도 검출 및 공간 가중합산 실험 ```Spatial_weight```, 축소 계층 실험 ```Flat``` 실험으로 구성되어있다.
-
-```resnet```폴더 내부는 action recognition 정보를 활용하기 위한  인코더 디코더 구조 개선실험이 첨부되어있다.
-
-각 실험에 대한 결과는 ```Results``` 에 저장되어있으며 함께 있는 python 파일은 실험을 돌리기 위한 main.py이다. 이때, main.py는 다음과 같이 구성되어 있다.
+```unet``` 폴더 내부는 skip connection 연결에 따른 실험 ```Skip Connection```, FC/Conv 임베딩 구조 개선 실험 ```Embedding```, 유사도 검출 및 공간 가중합산 실험 ```Spatial_weight```, 축소 계층 실험 ```Flat``` 실험으로 구성되어있음.
+```resnet```폴더 내부는 action recognition 정보를 활용하기 위한  인코더 디코더 구조 개선실험이 첨부됨.
+각 실험에 대한 결과는 ```Results``` 에 저장되어있으며 함께 있는 python 파일은 실험을 돌리기 위한 main.py이다. 이때, main.py는 다음과 같이 구성되어 있음.
 
 ```python
 import os
@@ -145,9 +143,7 @@ training(input_dic)
 ```
 
 실행파일은 dictionary ```input_dic```에서 설정한 옵션에 따라 동작됨. 
-
 다양한 옵션이 있는것을 확인할 수 있지만 실제 최종보고서에서 실험한 세팅과 관련없는 옵션들은 꺼두었음.
-
 ```input_dic```과 기타 조정할 수 있는 옵션으로는 다음이 있음.
 
 
@@ -213,5 +209,5 @@ Results
             ├──last.pth
 ```
 
-```best_loss```는 학습 중간 가장 최적의 validation loss를 달성했을때의 validation 결과를 저장한 것이고, ```last```는 매 ```input_dic['save_iter']```마다 저장한 결과이다.
-이때 validation 결과로 출력된 결과는 ```out_image```에 저장되며, 각 계층의 weight을 시각화 한 그림은```weight_image```로 저장된다.
+```best_loss```는 학습 중간 가장 최적의 validation loss를 달성했을때의 validation 결과를 저장한 것이고, ```last```는 매 ```input_dic['save_iter']```마다 저장한 결과임.
+이때 validation 결과로 출력된 결과는 ```out_image```에 저장되며, 각 계층의 weight을 시각화 한 그림은```weight_image```로 저장됨.
