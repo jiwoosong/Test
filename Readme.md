@@ -146,9 +146,6 @@ training(input_dic)
 다양한 옵션이 있는것을 확인할 수 있지만 실제 최종보고서에서 실험한 세팅과 관련없는 옵션들은 꺼두었음.
 ```input_dic```과 기타 조정할 수 있는 옵션으로는 다음이 있음.
 
-
-#### ```input_dic``` 옵션
-
 ```input_dic['dataset']``` : 데이터세트 종류 (Humaneva, Charades_v1_480)
 
 ```input_dic['frame_interval']``` : 프레임 간격 (defalut=50)
@@ -166,9 +163,6 @@ training(input_dic)
 ```input_dic['optim']``` : Optimizer (default=Adam)
 
 ```input_dic['criterion']``` : 손실함수 (default=L1)
-
-#### ```Mem_param``` 옵션
-
 ```Mem_param['embed_size']``` : 메모리네트워크에 저장될 채널 사이즈
 
 #### 기타 옵션
