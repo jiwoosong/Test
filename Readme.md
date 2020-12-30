@@ -80,7 +80,7 @@ training
 
 각 실험에 대한 결과는 ```Results``` 에 저장되어있으며 함께 있는 python 파일은 실험을 돌리기 위한 main.py이다. 이때, main.py는 다음과 같이 구성되어 있다.
 
-```Python
+```python
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0" #GPU
 
@@ -143,29 +143,51 @@ input_param = Prepare(input_dic)
 training(input_dic)
 
 ```
-실행파일은 ```input_dic``` dictionary 설정한 옵션에 따라 동작된다. 연구를 수행하면서 다양한 옵션에 따라 학습법을 달리해보았으나 최종보고서에 기재된 내용과 무관한 
+
+실행파일은 dictionary ```input_dic```에서 설정한 옵션에 따라 동작됨. 
+
+다양한 옵션이 있는것을 확인할 수 있지만 실제 최종보고서에서 실험한 세팅과 관련없는 옵션들은 꺼두었음.
+
+```input_dic```과 기타 조정할 수 있는 옵션으로는 다음이 있음.
+
+
+#### ```input_dic``` 옵션
+
+```input_dic['dataset']``` : 데이터세트 종류 (Humaneva, Charades_v1_480)
+
+```input_dic['frame_interval']``` : 프레임 간격 (defalut=50)
+
+```input_dic['W']```,```input_dic['H']``` : 이미지 크기 (default=64)
+
+```input_dic['vis_port']``` : Visdom 포트 번호 (defalut=7097)
+
+```input_dic['max_iter']``` : 학습 Iteration
+
+```input_dic['val_iter']``` : 평가 Iteration
+
+```input_dic['val_iter']``` : 저장할 Iteration
+
+```input_dic['optim']``` : Optimizer (default=Adam)
+
+```input_dic['criterion']``` : 손실함수 (default=L1)
+
+#### ```Mem_param``` 옵션
+
+```Mem_param['embed_size']``` : 메모리네트워크에 저장될 채널 사이즈
+
+#### 기타 옵션
+
+```channels, noskip``` : 인코더/디코더의 각 채널과 스킵커넥션 연결 구성
+
+
 
 
 #### 저장된 결과
 ---
-### - Example 1
-#### - Make a function that sums from 1 to N and output the result.
-```C++
-#include<stdio.h>
-int sum(int n);
+```training```의 각 실험의 ```Results``` 폴더 혹은, 새롭게 학습시켜 얻은 ```Results```폴더는 다음 구성을 따름. 
 
-void main() {
-	int n;
-	printf("1부터 n까지의 합 계산 \n");
-	printf("정수 n 입력 :");
-	scanf_s("%d", &n);
-	printf("1부터 %d까지의 합:%d \n", n, sum(n));
-}
-int sum(int n) {
-	int a = 0;
-	for (int i = 1; i <= n; i += 1) {
-		a += i;
-	}
-	return a;
-}
+(일부 폴더 구성이 다른 경우가 있을 수 있음.)
+```bash
+
 ```
+
