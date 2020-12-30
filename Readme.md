@@ -163,6 +163,7 @@ training(input_dic)
 ```input_dic['optim']``` : Optimizer (default=Adam)
 
 ```input_dic['criterion']``` : 손실함수 (default=L1)
+
 ```Mem_param['embed_size']``` : 메모리네트워크에 저장될 채널 사이즈
 
 #### 기타 옵션
