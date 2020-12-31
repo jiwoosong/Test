@@ -54,9 +54,8 @@ REDS
   ├──train_sharp_bicubic
   ├──train_sharp
 ```
-학습에 활용되는 동영상 클립의 갯수는 
+학습에 활용되는 동영상 클립의 갯수는 270개로 training 세트 266개 validation 세트 4개로 구성됨. 주의할 점은 ```meta_info_REDS_GT.txt```와 ```meta_info_REDS4_test_GT.txt```로 트레이닝과 평가 세트를 구분하기 때문에 하나의 폴더에 구분없이 ```0~269``` 동영상 클립이 들어있는 폴더를 구성하도록 함.
 
-이때 주의할 점은 EDVR 학습에 활용한 데이터세트는 270개로 training 세트와 validation 세트를 따로 폴더로 구별하지 않는다.
 
 
 
