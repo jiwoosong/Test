@@ -5,7 +5,7 @@
 
 #### - 코드 준비
 ---
-첨부된 코드는 EDVR에서 제공하는 코드의 구조를 일부 따름. 제공된 코드는 Anaconda 가상환경을 활용하며 아래 설치를 수행하도록 함.
+첨부된 코드는 EDVR에서 제공하는 코드의 구조를 일부 따름. 제공된 코드는 Anaconda 가상환경을 활용하며 아래 설치가 필요함.
 
 ```bash
 activate pytorch #"Conda Env Name"
@@ -13,13 +13,14 @@ conda install future lmdb matplotlib numpy Pillow pyyaml requests scikit-image s
 conda install ninja==1.9 pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=10.1 -c pytorch
 pip install addict tb-nightly opencv-python==3.4.11.43 opencv-contrib-python==3.4.11.43
 ```
-이때 EDVR의 PCD Alignment 모듈에서 작동되는 deforamable convolution의 경우 C 컴파일이 필요함. 따라서 EDVR git 프로젝트를 빌드하고 빌드된 deformable convolution을 가져오도록 함.
+이때 EDVR의 PCD Alignment 모듈에서 작동되는 deforamable convolution의 경우 C 컴파일이 필요함. 따라서 EDVR git 프로젝트를 빌드하고 빌드된 deformable convolution을 가져와야 함.
 
 ```bash
 git clone https://github.com/xinntao/BasicSR.git
 python setup.py develop
 ```
-빌드 이후 ```EDVR/basicsr/models/ops/dcn/``` 에 빌드된 ```deform_conv_ext.*.so``` 파일을 제공된 코드의 ```video_super_resolution/video_module/EDVR_UTILS/basicsr/models/ops/dcn/```로 이동하면 코드를 구동하기 위한 기본적인 준비를 완료할 수 .
+
+빌드 이후 ```EDVR/basicsr/models/ops/dcn/``` 에 빌드된 ```deform_conv_ext.*.so``` 파일을 제공된 코드의 ```video_super_resolution/video_module/EDVR_UTILS/basicsr/models/ops/dcn/```로 이동하면 코드를 구동하기 위한 기본적인 준비를 완료할 수 있음.
 
 #### - 코드 구조
 ---
@@ -35,9 +36,9 @@ video_super_resolution
 
 EDVR_UTILS      : EDVR에서 제공하는 유틸리티 중 일부를 모아놓은 폴더. ```basicsr```은 전체 EDVR 네트워크를 구성하기 위한 모듈들이 구현되어 있으며 연구에 활용한 네트워크는 ```video_super_resolution/video_module/EDVR_UTILS/basicsr/models/archs```에 구현되어있음.
 
-Memory_Module   : 메모리 네트워크가 구현되어있는 폴더.
+```Memory_Module```   : 메모리 네트워크가 구현되어있는 폴더.
 
-TRAINING/TESTING  : 학습 / 평가를 수행하기 위한 유틸리티를 모아놓은 폴더.
+```TRAINING```/```TESTING```  : 학습 / 평가를 수행하기 위한 유틸리티를 모아놓은 폴더.
 
 
 
@@ -45,7 +46,7 @@ TRAINING/TESTING  : 학습 / 평가를 수행하기 위한 유틸리티를 모�
 
 ### 2. 데이터세트 설정
 ---
-연구에서 활용한 데이터세트는 REDS 데이터세트로 2019 NTIRE 챌린지에서 공개되었으며 SNU 서버 또는 Google Drive를 통해 다운로드 받을 수 있다. 다운로드를 위한 링크는 https://seungjunnah.github.io/Datasets/reds.html 에서 다운로드 받을 수 있다.
+연구에서 활용한 데이터세트는 REDS 데이터세트로 2019 NTIRE 챌린지에서 공개되었으며 SNU 서버 또는 Google Drive를 통해 다운로드 받을 수 있다. 다운로드를 위한 링크는 https://seungjunnah.github.io/Datasets/reds.html 에서 다운로드 받을 수 있음.
 ```bash
 REDS
   ├──train_sharp_bicubic
@@ -55,15 +56,13 @@ REDS
 
 
 
-
-
 ### 3. 트레이닝 설정
 
 #### - 폴더 구성
 ---
 본 연구에서 구성한 실험 세팅은 ```TRAINING``` 폴더 내부에 ```train1```,```train2```, ```train3```에 정리되어있음.
 ```bash
-Training
+TRAINING
   ├──option
   ├──train1
     ├──experiments
@@ -104,7 +103,7 @@ TRAIN_LOAD_FREEZE.TRAIN(model_name = '',
 ```opt_input```의 경우 트레이닝에서 설정한 옵션으로 본 연구에서 활용한 옵션파일은 ```video_super_resolution/video_module/TRAINING/option/``` 안에 ```1e-4.yml``` 임. 
 옵션은 크게 ```datasets```, ```network_g```, ```path```, ```train```, ```val```로 구성되어 있음.
 
-```datasets``` : 데이터세트의 경로, 로더를 설정할 수 있음. ```train```과 ```val```에 대해 ```dataroot_gt```, ```dataroot_lq```, ```meta_info_file```의 경로를 프로젝트의 절대 경로로 변경하여 수정하도록 함.
+```datasets``` : 데이터세트의 경로, 로더를 설정할 수 있음. ```train```과 ```val```에 대해 ```dataroot_gt```, ```dataroot_lq```, ```meta_info_file```의 경로를 본인 프로젝트의 절대 경로로 수정해야함.
 
 ```yml
 # dataset and data loader settings
@@ -158,11 +157,17 @@ datasets:
 
 
 ### 4. 평가 설정
----
 #### - 폴더 구성
-
-
-
+---
+```bash
+TESTING
+  ├──option
+  ├──64_concat_crop7
+    ├──test*.py
+  ├──64_concat_nopcd_crop7
+  ...
+```
+연구에서 각 Table에 기재한 성능 평가 테스트 환경은 ```TESTING``` 폴더 내부에 각 폴더로 세분화 해놓았음. ```TRAINING```폴더의 각 ```experiments/models/*.pth```의 weight값을 불러와 test할 수 있도록 구성했음. 각 폴더의 내부 파이썬 파일을 수행하면 세개의 실험 결과가 출력되고 ```*.log```파일에 기록됨.
 
 
 
