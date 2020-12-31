@@ -1,7 +1,9 @@
 
 # 동영상 초해상화 네트워크
 
-### 1. 코드구성
+### 1. 코드 구성
+---
+#### - 코드 준비
 ---
 첨부된 코드는 EDVR에서 제공하는 코드의 구조를 일부 따름. 제공된 코드는 Anaconda 가상환경을 활용하며 아래 설치를 수행하도록 함.
 
@@ -17,23 +19,46 @@ pip install addict tb-nightly opencv-python==3.4.11.43 opencv-contrib-python==3.
 git clone https://github.com/xinntao/BasicSR.git
 python setup.py develop
 ```
-빌드 이후 ```EDVR/basicsr/models/ops/dcn/src/``` 에 빌드된 파일을 제공된 코드의 ```/EDVR_UTILS/basicsr/models/ops/dcn/src/```에 붙여넣으면 준비가 끝남.
+빌드 이후 ```EDVR/basicsr/models/ops/dcn/``` 에 빌드된 ```deform_conv_ext.*.so``` 파일을 제공된 코드의 ```video_super_resolution/video_module/EDVR_UTILS/basicsr/models/ops/dcn/```로 이동함. 이로 코드를 구동하기 위한 준비를 완료함.
 
-
-
+#### - 코드 구조
+---
 ```bash
-video_restoration
+video_super_resolution
   ├──video_module
+    ├──EDVR_UTILS
+      ├──basicsr
+      ├──dataset_option
+      ├──meta_info
     ├──Memory_Module
-    ├──Network_Module
-    ├──training
-    ├──jutils, Total_Datset, ..etc
+    ├──TESTING
+    ├──TRAINING
+    ├──..etc
 ```
-Memory_Module   : 메모리 네트워크 구성하기 위한 모듈, Unet과 Resnet을 위한 메모리가 구분되어 있음. 
 
-Network_Module  : Encoder과 Decoder 네트워크를 구성하기 위한 모듈, Unet과 Resnet을 위한 메모리가 구분되어 있음.
+EDVR_UTILS      : EDVR에서 제공하는 유틸리티 중 일부를 모아놓은 폴더. ```basicsr```은 전체 EDVR 네트워크를 구성하기 위한 모듈들이 구현되어 있으며 연구에 활용한 네트워크는 ```video_super_resolution/video_module/EDVR_UTILS/basicsr/models/archs```에 구현되어있음.
 
-training        : 학습을 돌리기 위한 파일와 결과를 첨부했음. 결과는 Results 내부에 저장되어있음.
+Memory_Module   : 메모리 네트워크가 구현되어있는 폴더.
+
+TRAINING/TESTING  : 학습 / 평가를 수행하기 위한 유틸리티를 모아놓은 폴더.
+
+
+
+
+
+### 2. 데이터세트 설정
+---
+연구에서 활용한 데이터세트는 REDS 데이터세트로 2019 NTIRE 챌린지에서 공개되었으며 SNU 서버 또는 Google Drive를 통해 다운로드 받을 수 있다. 다운로드를 위한 링크는 https://seungjunnah.github.io/Datasets/reds.html 에서 다운로드 받을 수 있다.
+```bash
+REDS
+  ├──train_sharp_bicubic
+  ├──train_sharp
+```
+학습에 활용되는 동영상 클립의 갯수는 
+
+이때 주의할 점은 EDVR 학습에 활용한 데이터세트는 270개로 training 세트와 validation 세트를 따로 폴더로 구별하지 않는다.
+
+
 
 
 
